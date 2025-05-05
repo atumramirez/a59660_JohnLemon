@@ -6,8 +6,15 @@ public class Observer : MonoBehaviour
 {
     public Transform player;
     public GameEnding gameEnding;
+    public PlayerMovement playerMovement;
+    public float damagePerSecond = 10f; 
 
     bool m_IsPlayerInRange;
+
+    void Start()
+    {
+        playerMovement = player.GetComponent<PlayerMovement>(); 
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -37,7 +44,7 @@ public class Observer : MonoBehaviour
             {
                 if (raycastHit.collider.transform == player)
                 {
-
+                    playerMovement.TakeDamage(damagePerSecond * Time.deltaTime);
                 }
             }
         }
